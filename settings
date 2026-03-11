@@ -1,0 +1,71 @@
+set pager_index_lines = 5
+set collapse_all=yes
+set pager_stop = yes
+set include
+set menu_scroll
+set auto_tag = yes
+#unset help
+#set arrow_cursor = "yes"
+
+# Signature
+set signature="~/.config/neomutt/signature/company.txt
+#set include_signature=yes
+
+# Sort by threads
+set sort = threads
+
+# Sort threads by last date recieved - newest first
+set sort_aux = reverse-last-date-received
+
+# Show date in year/month/day hour:minute format
+set date_format="%y/%m/%d %I:%M%p"
+
+# Don't send email if regex detects words for an attachment being present
+set abort_noattach = ask-yes
+set abort_noattach_regex = "\\<attach(|ed|ments?)\\>"
+
+# Define content headers in email
+my_hdr Accept-Language: en-GB, en
+my_hdr Content-Language: en-GB
+my_hdr Content-Transfer-Encoding: base64
+set send_charset="utf-8"
+set charset="utf-8"
+
+#set edit_headers = yes
+
+set delete = yes
+set sidebar_visible
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_new_mail_only = no
+set sidebar_width = 25
+set sidebar_short_path = yes
+set sidebar_delim_chars="/"
+set sidebar_folder_indent
+set sidebar_indent_string= "  "
+
+set mail_check_stats
+set fast_reply
+set text_flowed
+set editor="vim -c 'match ErrorMsg \"\\s\\+$\"' -c 'setlocal fo=awnqptc comments=nb:> noautoindent filetype=mail wm=0 tw=0 nonumber digraph list nojs spell spelllang=en_gb'"
+set collapse_unread
+set arrow_cursor = "no"
+set index_format = "%4C %Z %3M %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+#set pager_read_delay = 5
+
+# Mailcap file is used to tell mutt how to open different types of file
+set mailcap_path = "~/.config/neomutt/mailcap"
+
+# File that headers will be cached
+set header_cache = "~/.cache/neomutt"
+set my_tprot='t-prot -aelmtS -c --bigq -Mmutt --spass -L$HOME/.config/neomutt/mlfooters -A$HOME/.config/neomutt/adfooters'
+set display_filter=$my_tprot
+auto_view text/html
+alternative_order text/enriched text/plain text/html text
+
+# Spell checker
+#set ispell="aspell -e -c"
+
+# lbdb is a versatile contact query tool.
+# Invoke via ctrl-t in an address prompt
+set query_command = "/usr/bin/lbdbq"
+bind editor <Tab> complete-query

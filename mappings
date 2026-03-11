@@ -1,0 +1,158 @@
+## Keybindings: Unbinding
+unbind index,pager a
+unbind index,pager A
+unbind index,pager d
+unbind index,pager F
+unbind index,pager G
+unbind index,pager h
+unbind index,pager H
+unbind index,pager i
+unbind index,pager j
+unbind index,pager \Cj
+unbind index,pager J
+unbind index,pager J
+unbind index,pager k
+unbind index,pager K
+unbind index,pager L
+unbind index,pager L
+unbind index,pager M
+unbind index,pager o
+unbind index,pager \Co
+unbind index,pager p
+unbind index,pager \Cp
+unbind index q
+unbind index,pager t
+unbind index,pager u
+unbind index,pager \CU
+unbind index,pager V
+unbind index x
+unbind index,pager z
+unbind index,pager Z
+unbind index,pager <Space>
+unbind index,pager <
+unbind index,pager >
+unbind index,pager ]
+unbind index,pager [
+unbind index,pager $
+unbind index,pager !  
+unbind index <Right>
+unbind index <Left>
+unbind index T
+unbind index <Esc>t
+unbind index j
+unbind attach s
+unbind compose a
+unbind index,pager <Esc>V
+unbind pager q
+unbind pager <Right>
+unbind pager <Left>
+unbind index n
+unbind index N
+unbind index,pager %
+unbind index,pager \Cz
+unbind index,pager z
+
+## Keybindings: Binding
+bind index T tag-thread
+bind index <Esc>t tag-pattern
+bind index \cq quit
+bind index,pager <Delete> purge-message
+macro index,pager <C-Up> "<sidebar-prev><sidebar-open>"		# Ctrl-Up Arrow - Previous Mailbox
+macro index,pager <C-Down> "<sidebar-next><sidebar-open>"		# Ctrl-Down Arrow - Next Mailbox
+bind index,pager \Co sidebar-open
+bind index,pager o sort-mailbox		# Ctrl-o - Open Highlighted Mailbox
+bind index,pager \Cj sidebar-toggle-visible	# Toggle Sidebar
+bind index \Cu toggle-read
+bind index,pager '[' sidebar-page-up
+bind index,pager ']' sidebar-page-down
+bind index,pager @ compose-to-sender
+bind index p search-opposite
+bind index,pager G group-chat-reply
+bind index,pager L modify-labels
+bind index t tag-entry
+bind pager t tag-message
+bind index,pager d undelete-message
+bind index F shell-escape
+bind index '!' flag-message
+bind index,pager <S-Next> next-unread-mailbox
+bind index,pager j what-key
+bind pager <Left> exit
+bind index a collapse-all
+bind index N toggle-new
+bind index n search-next
+
+# Sidebar
+macro index,pager '}' "<sidebar-next-new>\Co"	"Open next mailbox with new emails"
+macro index,pager '{' "<sidebar-prev-new>\Co"	"Open previous mailbox with new emails"
+macro index,pager ')' "<sidebar-next-new>\Co<sort-reverse>d<tag-pattern>~O<enter><clear-flag>O<untag-pattern>~A<enter><sort>t<change-folder>Inbox\n" "Clear marked as unread but old flag from emails saved to other folders"
+
+# Attachement handling
+macro index,pager V "<view-attachments><search>pdf<enter><view-mailcap><exit>" "Open html pdf Attachments"
+macro compose a "<attach-file><bol>~/Downloads/<eol><Tab><Tab>" "Attach from Downloads"
+macro compose A "<shell-escape>bash $HOME/.config/neomutt/filepick<enter><enter-command>source $HOME/.config/neomutt/tmpfile<enter><shell-escape>bash $HOME/.config/neomutt/filepick clean<enter>" "Attach with your file manager"
+
+macro pager q "<exit><collapse-thread>" "exit"
+
+macro index <Esc>n "<clear-flag>o" "Remove new but seen flag"
+
+# Change Mailbox
+macro index,pager i "<change-folder>Inbox\n" "open Inbox"
+macro index,pager S "<change-folder>Sent\n" "open Sent Mail."
+
+# toggle limit views in mailbox
+macro index <Esc>a <limit>~N|~O<enter> "show Unopened messages"
+macro index <Esc>f "<limit>~F<enter>" "limit to flagged messages"
+macro index <Right> "<limit-current-thread><collapse-thread>" "show current thread"
+macro index <Left> "<limit>all<enter>" "show all messages (undo limit)"
+
+# Save Message
+macro attach s "<save-entry><bol>~/Downloads/<eol>" "Save to Downloads"
+macro index s "<tag-thread><save-message>?<Tab>"	"Save Message"
+macro pager s "q<tag-thread><save-message>?<Tab>"        "Save Message"
+
+macro index,pager <Esc>1 "<tag-thread><save-message>=Inbox<enter><enter>" "Move to Inbox"
+macro index,pager <Esc>2 "<tag-thread><save-message>=Sent<enter><enter>" "Move to Sent Mail"
+macro index,pager <Esc>3 "<tag-thread><save-message>=Archive<enter><enter>" "Move to Archive"
+macro index,pager <Esc>4 "<tag-thread><save-message>=clients<enter><enter>" "Move to Clients"
+macro index,pager <Esc>5 "<change-folder>ui_code<enter>" "Change to UI Code"
+macro index <Esc>8 "<change-folder>Sent\n<sort-mailbox>d<tag-pattern>(~A)<enter><save-message>=Inbox<enter><enter><change-folder>Inbox\n<sort-mailbox>t<collapse-all>" "save all messages from sent folder to inbox"
+macro index <Esc>9 "<change-folder>Sent\n<sort-mailbox>d<tag-pattern>~s discrepancy<enter><save-message>discrepancies/discrepancy_check/<enter><enter><change-folder>Inbox\n<sort-mailbox>t<collapse-all>" "save all messages from sent folder to discrepancy checker"
+
+## Keybinds: Macros
+macro generic \e0 ":unset display_filter\n" "Turn TOFU protection off"
+macro generic \e9 ":set display_filter='$my_tprot'\n" "Turn TOFU protection on"
+macro pager \e0 ":unset display_filter; exec exit\n:exec display-message\n" "Turn TOFU protection off"
+macro pager \e9 ":set display_filter='$my_tprot'; exec exit\n:exec display-message\n" "Turn TOFU protection on"
+
+# Scan emails and highlight any URLs that are detected
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+# Sync mailboxes using mbsync script
+macro index $ "<change-folder>Inbox<enter><enter-command>unset wait_key<enter><shell-escape>bash ~/.config/scripts/mail_sync.sh >/dev/null 2>&1 &<enter><enter-command>set wait_key=yes<enter><limit>~F|~N|~O<enter>" "Sync email and notmuch"
+
+macro index,pager % "<change-folder>ui_code<enter><enter-command>unset wait_key<enter><shell-escape>mbsync -c "/home/<user>/.config/mbsync/mbsync-uilogin" uilogin >/dev/null 2>&1 &<enter>" "get ui login email"
+macro index,pager ^ "<change-folder>discrepancies<enter><enter-command>unset wait_key<enter><shell-escape>bash ~/.config/scripts/discrepancy_sync.sh >/dev/null 2>&1 &<enter>" "Sync discrepancy email and notmuch"
+
+#https://to.mw/posts/neomutt-markdown-email
+macro compose m \
+"<enter-command>unset wait_key<enter>\
+<enter-command>set pipe_decode<enter>\
+<pipe-message>pandoc -f gfm -t plain -o /tmp/msg.txt<enter>\
+<pipe-message>pandoc -s -f gfm --self-contained -o /tmp/msg.html --resource-path ~/.config/neomutt/templates --template email --metadata title=\"-\"<enter>\
+<enter-command>unset pipe_decode<enter>\
+<enter-command>set wait_key<enter>\
+<attach-file>/tmp/msg.txt<enter>\
+<attach-file>/tmp/msg.html<enter>\
+<tag-entry><previous-entry><tag-entry><group-alternatives>\
+<edit-description><kill-line><enter>\
+<previous-entry><detach-file>" \
+"Convert markdown to HTML5 and plaintext alternative content types"
+
+# 'L' performs a notmuch query, showing only the results messages matching a notmuch pattern" 
+#macro index L "<enter-command>unset wait_key<enter><shell-escape>read -p 'notmuch query: ' x; echo \$x >~/.cache/mutt_terms<enter><limit>~i \"\`notmuch search --output=messages \$(cat ~/.cache/mutt_terms) | head -n 600 | perl -le '@a=<>;chomp@a;s/\^id:// for@a;$,=\"|\";print@a'\`\"<enter>" "show only 
+#macro index z <limit>~F<enter> "show flagged messages"
+#macro index Z <limit>~N|~U|~F|~d<7d<enter>
+#macro index,pager i "<change-folder>Inbox<enter><limit>~F|~N|~O<enter>" "open Inbox"					
+#macro index,pager S "<change-folder>[Gmail]/Sent^V Mail<enter><limit>~d<3d<enter>" "open Sent Mail"
+

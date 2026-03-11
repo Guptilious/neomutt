@@ -1,0 +1,4 @@
+source ~/.config/neomutt/settings
+source ~/.config/neomutt/mappings
+source ~/.config/neomutt/colors/colors
+source ~/.config/neomutt/accounts/gmail

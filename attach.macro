@@ -1,0 +1,3 @@
+macro compose W \
+"<attach-file>`cat /tmp/muttattach`<enter>"\
+"attach file"

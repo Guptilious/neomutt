@@ -1,0 +1,31 @@
+set realname = ""
+set ssl_force_tls = no
+set sleep_time = 0
+
+set record = /dev/null
+set sendmail="msmtp -d"
+set use_from=yes
+set envelope_from=yes
+
+set mbox_type=Maildir
+
+unset imap_passive
+set imap_idle = yes
+set imap_keepalive = 300
+set timeout = 10
+
+set folder = "/var/mail/personal/"
+set spoolfile = +Inbox
+set record = +Sent
+
+set from = 'email@email'
+set imap_user = 'email@email'
+
+set use_domain=yes
+#unset message_id
+#set imap_list_subscribed = yes
+#set imap_check_subscribed = yes
+#unset mail_check_recent
+
+mailboxes +Inbox \
+	`tree /var/mail/personal -l -d -I "\[Gmail\]|cur|new|tmp|certs|.notmuch|Sent|Drafts|Trash|Conversation History|Unsent Messages|clients|Junk|Archive|alerts" -afin --noreport | awk '{if(NR>1)print}' | sort -V | tr '\n' ' '`

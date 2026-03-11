@@ -1,0 +1,76 @@
+#https://neomutt.org/guide/configuration.html search color
+
+# General 
+color normal black brightwhite
+color indicator black white #currently selected message. default makes bar clear, disabled arrow to save space.
+
+# Sidebar
+color sidebar_highlight black white
+color sidebar_divider black brightwhite
+color sidebar_flagged brightwhite brightwhite
+color sidebar_unread bold black white
+color sidebar_new brightwhite brightwhite
+
+# Default index colors:
+color index black brightwhite '.*'
+color index_author black brightwhite '.*'
+color index_number black brightwhite
+color index_subject black brightwhite '.*'
+
+# For new mail:
+color index bold black white "~N|~O"
+color index_author bold black white "~N|~O"
+color index_subject bold black white "~N|~O"
+color progress bold black white
+
+# highlight TOFU protection:
+color body      black white   "^\\[---.*"
+
+# Header colors:
+color header black brightwhite ".*"
+color header black brightwhite "^(From)"
+color header black brightwhite "^(Subject)"
+color header black brightwhite "^(CC|BCC)"
+
+mono bold bold
+mono underline underline
+mono indicator reverse
+mono error bold
+
+# Message Body
+color error cyan default
+color tilde red default
+color message default default
+color markers red white
+color attachment black brightwhite
+color search brightmagenta default
+color status default black
+color hdrdefault black brightwhite
+color quoted black white
+color quoted1 black brightwhite
+color quoted2 black white
+color quoted3 black brightwhite
+color quoted4 black white
+color quoted5 black brightwhite
+color signature black white
+color bold black default
+color underline black default
+
+color body black white "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+"			# Email addresses
+color body brightblue default "(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+"	# URL
+color body green default "\`[^\`]*\`"						# Green text between ` and `
+color body brightblue default "^# \.*"						# Headings as bold blue
+color body brightcyan default "^## \.*"						# Subheadings as bold cyan
+color body brightgreen default "^### \.*"					# Subsubheadings as bold green
+color body black white "^(\t| )*(-|\\*) \.*"					# List items as yellow
+color body brightcyan default "[;:][-o][)/(|]"					# emoticons
+color body brightcyan default "[;:][)(|]"					# emoticons
+color body brightcyan default "[ ][*][^*]*[*][ ]?"				# more emoticon?
+color body brightcyan default "[ ]?[*][^*]*[*][ ]"				# more emoticon?
+color body red default "(BAD signature)"
+color body cyan default "(Good signature)"
+color body brightblack default "^gpg: Good signature .*"
+color body brightyellow default "^gpg: "
+color body red default "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+color body brightyellow red "^gpg: BAD signature from.*"
+mono body bold "^gpg: Good signature"

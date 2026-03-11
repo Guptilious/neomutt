@@ -1,0 +1,44 @@
+set realname = ""
+set ssl_force_tls = no
+set sleep_time = 0
+
+set sendmail="msmtp -d"
+set use_from=yes
+set envelope_from=yes
+
+set mbox_type=Maildir
+
+unset imap_passive
+set imap_idle = yes
+set imap_keepalive = 300
+set timeout = 10
+
+set folder = "/var/mail/<placeholder/"
+#set folder = "imap://user@placeholder.com@localhost:2143/"
+set spoolfile = +Inbox
+set record = +Sent
+
+set from = 'email'
+set imap_user = 'email'
+set imap_pass = 
+#alternates ^user(?:\+[^@]+)?@placeholder\.com$
+
+set hostname="placeholder.com"
+set use_domain=yes
+#unset message_id
+#set imap_list_subscribed = yes
+#set imap_check_subscribed = yes
+#unset mail_check_recent
+
+#set hidden_host = yes
+
+#set sendmail_wait=-1
+
+mailboxes +Inbox \
+	Sent \
+	Drafts \
+	general \
+	`tree /var/mail/<placeholder> -l -d -I "cur|new|tmp|certs|.notmuch" -afin --noreport | awk '{if(NR>1)print}' | tr '\n' ' '` \
+	`tree /var/mail/<placeholder> -l -d -I "cur|new|tmp|certs|.notmuch|Sent|Drafts|Trash|Conversation History|Unsent Messages|clients|Junk|Archive|alerts" -afin --noreport | awk '{if(NR>1)print}' | sort -V | tr '\n' ' '` \
+	Archive \
+	Junk
