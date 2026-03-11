@@ -1,0 +1,33 @@
+SyncState *
+
+IMAPAccount msoffice
+Host localhost
+Port <PORT>
+User <EMAIL>
+Pass <DAV-MAIL-PASSWORD>
+SSLType None
+AuthMechs LOGIN
+
+IMAPStore msoffice-remote
+Account msoffice
+
+MaildirStore msoffice-local
+Path /var/mail/msoffice/
+Inbox /var/mail/msoffice/Inbox
+SubFolders Verbatim
+
+Channel msoffice
+Far :msoffice-remote:
+Near :msoffice-local:
+Patterns * !Trash !discrepancies/discrepancy_check !discrepancies/discrepancy_emails !discrepancies/mapping
+Create Both
+Remove Both
+SyncState *
+
+Channel msoffice-idmap
+Master :msoffice-remote:discrepancies/mapping
+Slave :scope3-local:discrepancies/mapping
+MaxMessages 1000
+ExpireUnread yes
+Create Both
+Sync All

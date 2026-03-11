@@ -1,0 +1,27 @@
+SyncState *
+
+IMAPAccount gmail
+AuthMechs LOGIN
+Host smtp.gmail.com
+User aaron.webb000@gmail.com
+Pass <GOOGLE-AUTH-TOKEN>
+SSLType IMAPS
+SSLVersions TLSv1.2
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+SubFolders Verbatim
+Path /var/mail/gmail/
+Inbox /var/mail/gmail/Inbox
+
+Channel gmail
+Far :gmail-remote:
+Near :gmail-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+Patterns * "!mail" "!new" ![Gmail]/Important ![Gmail]/Starred ![Gmail]/"All Mail"
+Create Both
+Remove Both
+SyncState *
+#Expunge Master
